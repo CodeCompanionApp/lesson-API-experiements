@@ -1,0 +1,35 @@
+{
+  "name": "@brwong/cc-poc",
+  "author": "Brandon Wong <projects@brwong.net> (https://www.brwong.net/)",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test-build/main.js",
+    "compile-prod": "cross-env NODE_ENV=production npm run compile",
+    "compile": "npm run compile-src && npm run compile-test",
+    "compile-test": "babel test --out-dir test-build",
+    "compile-src": "babel src --out-dir build",
+    "watch": "nodemon --watch src --watch test --exec \"npm run compile --silent\"",
+    "serverwatch": "nodemon --watch src --watch test --exec \"npm run compile --silent && node build/server.js\"",
+    "testwatch": "nodemon --watch src --watch test --exec \"npm run compile --silent && npm test\""
+  },
+  "dependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-plugin-transform-remove-console": "^6.8.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.22.0",
+    "chokidar": "^1.6.1",
+    "cross-env": "^3.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "tape": "^4.6.3",
+    "tape-promise": "^2.0.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": "",
+  "private": true
+}

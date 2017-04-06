@@ -1,0 +1,9 @@
+{
+  "presets": ["latest"],
+  "plugins": ["transform-runtime", "transform-object-rest-spread"],
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
