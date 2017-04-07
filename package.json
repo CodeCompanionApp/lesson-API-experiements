@@ -9,7 +9,7 @@
     "compile": "npm run compile-src && npm run compile-test",
     "compile-test": "babel test --out-dir test-build",
     "compile-src": "babel src --out-dir build",
-    "watch": "nodemon --watch src --watch test --exec \"npm run compile --silent\"",
+    "watch": "nodemon --watch src --watch test --exec \"npm run compile --silent && node build/main.js\"",
     "serverwatch": "nodemon --watch src --watch test --exec \"npm run compile --silent && node build/server.js\"",
     "testwatch": "nodemon --watch src --watch test --exec \"npm run compile --silent && npm test\""
   },
