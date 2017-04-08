@@ -24,6 +24,7 @@ export default function lesson(API) {
         }
     });
     API.presentSlide('Hi! This is the "Hello World!" demo of Code Companion!');
+    API.presentSlide(slides.welcome);
 };
 
 
