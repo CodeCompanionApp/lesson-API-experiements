@@ -1,5 +1,6 @@
 
 import chokidar from 'chokidar';
+import { join as pathJoin } from 'path';
 import { readFileSync } from 'fs';
 
 import lesson from './lesson.js';
@@ -7,26 +8,17 @@ import lesson from './lesson.js';
 const selectedFolder = 'files'
 
 function createAgent() {
-    const fileWatcher = chokidar.watch(selectedFolder);
-
-    function pathFilter(path) {
-        if( typeof path !== 'string' ) {
-            return path;
-        }
-        return path.replace(/^files\//g, '');
-    }
+    const fileWatcher = chokidar.watch('.', {cwd:selectedFolder});
 
     return {
         watcher: {
             on(evt, cb) {
-                fileWatcher.on(evt, function filterOutPathAndCall(...args) {
-                    const newArgs = args.map(pathFilter);
-                    cb(...newArgs);
-                });
+                //TODO: limit possible events (for security)?
+                fileWatcher.on(evt, cb);
             },
         },
         fileContents(path) {
-            return readFileSync(`${selectedFolder}/${path}`, 'UTF8');
+            return readFileSync(pathJoin(selectedFolder, path), 'UTF8');
         },
         presentSlide(content) {
             console.log();
